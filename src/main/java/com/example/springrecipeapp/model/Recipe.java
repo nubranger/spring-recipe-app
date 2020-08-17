@@ -1,6 +1,7 @@
 package com.example.springrecipeapp.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -15,9 +16,21 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     private String directions;
     //todo add
     //private Difficulty difficulty;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
